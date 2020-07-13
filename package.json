@@ -1,0 +1,17 @@
+{
+  "name": "gcp-starter-cloud-function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "entrypoint": "main",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "functions-framework --target=${npm_package_entrypoint}",
+    "deploy": "gcloud functions deploy ${name} --trigger-http --runtime nodejs12 --entry-point main"
+  },
+  "author": "chden",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^1.6.0"
+  }
+}
