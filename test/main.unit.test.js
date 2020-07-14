@@ -1,6 +1,6 @@
-const chai = require("chai");
+const chai = require('chai');
 const sinon = require('sinon');
-var sinonChai = require("sinon-chai");
+var sinonChai = require('sinon-chai');
 
 const { main } = require('../src/index.js');
 

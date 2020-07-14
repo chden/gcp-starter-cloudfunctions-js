@@ -1,4 +1,4 @@
-const chai = require("chai");
+const chai = require('chai');
 const chaiHttp = require('chai-http');
 
 const expect = chai.expect;
@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 describe('Main', () => {
     let url;
 
-    before("Initialize service url", function () {
+    before('Initialize service url', function () {
         url = process.env.BASE_URL;
         if (!url) {
             throw new Error('No BASE_URL provided!');
