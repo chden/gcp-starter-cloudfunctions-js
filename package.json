@@ -1,17 +1,30 @@
 {
   "name": "gcp-starter-cloud-function",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simple starter project for Google Cloud Function.",
+  "main": "bundle.js",
   "entrypoint": "main",
+  "runtime": "nodejs12",
+  "memory": "128MB",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "functions-framework --target=${npm_package_entrypoint}",
-    "deploy": "gcloud functions deploy ${name} --trigger-http --runtime nodejs12 --entry-point main"
+    "build": "webpack",
+    "build:dev": "webpack --config webpack.dev.js",
+    "start": "functions-framework --source=dist --target=${npm_package_entrypoint}",
+    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=dist --target=${npm_package_entrypoint}",
+    "deploy": "cd dist && gcloud functions deploy ${npm_package_name} --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
   },
   "author": "chden",
+  "contributors": [],
   "license": "MIT",
   "dependencies": {
     "@google-cloud/functions-framework": "^1.6.0"
+  },
+  "devDependencies": {
+    "generate-package-json-webpack-plugin": "^1.1.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.0.9",
+    "webpack-node-externals": "^2.5.0"
   }
 }
