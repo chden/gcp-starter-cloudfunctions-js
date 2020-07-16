@@ -2,19 +2,17 @@
   "name": "gcp-starter-cloud-function",
   "version": "1.0.0",
   "description": "Simple starter project for Google Cloud Function.",
-  "main": "bundle.js",
+  "main": "scripts/index.js",
   "entrypoint": "main",
   "runtime": "nodejs12",
   "memory": "128MB",
   "scripts": {
-    "build": "webpack",
-    "build:dev": "webpack --config webpack.dev.js",
     "test": "mocha --recursive ./test/**/*.unit.test.js",
     "test:debug": "mocha --nolazy --inspect-brk=9229 --recursive ./test/**/*.unit.test.js",
     "test:system": "mocha --recursive ./test/**/*.system.test.js",
-    "start": "functions-framework --source=dist --target=${npm_package_entrypoint}",
-    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=dist --target=${npm_package_entrypoint}",
-    "deploy": "cd dist && gcloud functions deploy ${npm_package_name} --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
+    "start": "functions-framework --source=scripts --target=${npm_package_entrypoint}",
+    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=scripts --target=${npm_package_entrypoint}",
+    "deploy": "gcloud functions deploy ${npm_package_name} --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
   },
   "author": "chden",
   "contributors": [],
@@ -28,10 +26,6 @@
     "generate-package-json-webpack-plugin": "^1.1.2",
     "mocha": "^8.0.1",
     "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.0.9",
-    "webpack-node-externals": "^2.5.0"
+    "sinon-chai": "^3.5.0"
   }
 }

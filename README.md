@@ -8,17 +8,17 @@ To start a local instance type: ```npm start```
 
 ## Deploy to GCP
 ### Set project
-List available projects: ```gcloud projects list```
+List available gcp projects: ```gcloud projects list```
 
-Set project: ```gcloud config set project YOUR_PROJECT_ID```
+Set project for gcloud: ```gcloud config set project YOUR_PROJECT_ID```
 
 ### Set region
 List available regions: ```gcloud functions regions list```
 
-Set region: ```gcloud config set functions/region YOUR_REGION```
+Set region for glcoud: ```gcloud config set functions/region YOUR_REGION```
 
 ### Deploy
-Finally deploy to GCP: ```npm run deploy```
+Finally deploy to gcp: ```npm run deploy```
 
 ## License
 Distributed under the MIT License. See LICENSE for more information.

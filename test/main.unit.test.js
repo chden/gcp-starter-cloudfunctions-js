@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 
-const { main } = require('../src/index.js');
+const { main } = require('../scripts/index.js');
 
 const expect = chai.expect;
 chai.should();

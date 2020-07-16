@@ -14,3 +14,7 @@
 .gitignore
 
 node_modules
+
+test
+
+README.md
