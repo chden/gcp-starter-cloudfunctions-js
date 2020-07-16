@@ -4,7 +4,7 @@ env:
   commonjs: true
   es2020: true
   mocha: true
-extends: 'eslint:recommended'
+extends: ['eslint:recommended', 'google']
 parserOptions:
   ecmaVersion: 11
 rules:

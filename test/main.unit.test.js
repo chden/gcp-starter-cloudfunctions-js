@@ -1,8 +1,8 @@
 const chai = require('chai');
-const sinon = require('sinon');
-var sinonChai = require('sinon-chai');
+const sinon = require("sinon");
+const sinonChai = require('sinon-chai');
 
-const { main } = require('../scripts/index.js');
+const {main} = require('../scripts/index.js');
 
 const expect = chai.expect;
 chai.should();
@@ -12,7 +12,7 @@ describe('Main', () => {
     describe('main', () => {
         const req = {};
         const res = {
-            send: sinon.stub()
+            send: sinon.stub(),
         };
         const resBody = 'Hello, World!';
 
