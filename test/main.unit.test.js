@@ -1,5 +1,5 @@
 const chai = require('chai');
-const sinon = require("sinon");
+const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
 const {main} = require('../scripts/index.js');
