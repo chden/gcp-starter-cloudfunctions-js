@@ -8,5 +8,5 @@ extends: ['eslint:recommended', 'google']
 parserOptions:
   ecmaVersion: 11
 rules:
-  quotes: ["warn", "single", "avoid-escape"]
-  indent: ["error", 4]
+  quotes: ['warn', 'single', 'avoid-escape']
+  indent: ['error', 4]
