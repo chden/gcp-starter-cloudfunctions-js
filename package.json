@@ -19,12 +19,12 @@
   "contributors": [],
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/functions-framework": "^1.6.0"
+    "@google-cloud/functions-framework": "^1.6.0",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "cors": "^2.8.5",
     "eslint": "^7.4.0",
     "eslint-config-google": "^0.14.0",
     "generate-package-json-webpack-plugin": "^1.1.2",
