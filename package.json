@@ -24,11 +24,13 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
     "eslint": "^7.4.0",
     "eslint-config-google": "^0.14.0",
     "generate-package-json-webpack-plugin": "^1.1.2",
     "mocha": "^8.0.1",
     "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0"
+    "sinon-chai": "^3.5.0",
+    "sinon-express-mock": "^2.2.1"
   }
 }

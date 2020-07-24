@@ -1,6 +1,6 @@
 # Google Cloud Starter - Cloud Functions
 
-This is a starter project for [Google Cloud Functions](https://cloud.google.com/functions) based on nodejs and is invoked by http requests. It is implemented in JavaScript and provides linting, cors, unit tests and system tests.
+This is a starter project for [Google Cloud Functions](https://cloud.google.com/functions) based on nodejs and is invoked by http requests. It is implemented in JavaScript and provides linting, [cors](https://github.com/expressjs/cors), unit tests and system tests.
 
 ## Install and run locally
 
