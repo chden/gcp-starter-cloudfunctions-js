@@ -26,4 +26,17 @@ describe('Hello', () => {
                 });
         });
     });
+
+    describe('helloUser', () => {
+        const resBody = 'Hello, test!';
+
+        it('should respond "Hello, test!"', async () => {
+            await chai.request(url)
+                .get('/gcp-starter-cloud-function/test')
+                .then(function(res) {
+                    expect(res).to.have.status(200);
+                    expect(res.text).to.equal(resBody);
+                });
+        });
+    });
 });
