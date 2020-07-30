@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 
+const app = express();
 // eslint-disable-next-line new-cap
 const router = express.Router();
 

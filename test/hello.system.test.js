@@ -5,6 +5,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Hello', () => {
+    const path = '/gcp-starter-cloud-function';
     let url;
 
     before('Initialize service url', function() {
@@ -19,7 +20,7 @@ describe('Hello', () => {
 
         it('should respond "Hello, World!"', async () => {
             await chai.request(url)
-                .get('/gcp-starter-cloud-function')
+                .get(path)
                 .then(function(res) {
                     expect(res).to.have.status(200);
                     expect(res.text).to.equal(resBody);
@@ -28,11 +29,12 @@ describe('Hello', () => {
     });
 
     describe('helloUser', () => {
-        const resBody = 'Hello, test!';
+        const username = 'test';
+        const resBody = `Hello, ${username}!`;
 
         it('should respond "Hello, test!"', async () => {
             await chai.request(url)
-                .get('/gcp-starter-cloud-function/test')
+                .get(`${path}/${username}`)
                 .then(function(res) {
                     expect(res).to.have.status(200);
                     expect(res.text).to.equal(resBody);
