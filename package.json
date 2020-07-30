@@ -1,9 +1,9 @@
 {
   "name": "gcp-starter-cloud-function",
   "version": "1.0.0",
-  "description": "Simple starter project for Google Cloud Function.",
+  "description": "Simple starter project for Google Cloud Functions.",
   "main": "scripts/index.js",
-  "entrypoint": "main",
+  "entrypoint": "app",
   "runtime": "nodejs12",
   "memory": "128MB",
   "scripts": {
@@ -20,7 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "@google-cloud/functions-framework": "^1.6.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
