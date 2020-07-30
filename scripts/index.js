@@ -1,28 +1,19 @@
 'use strict';
 
-const winston = require('winston');
-// const expressWinston = require('winston-express-middleware');
-const {LoggingWinston} = require('@google-cloud/logging-winston');
+const express = require('express');
+const cors = require('cors');
 
-const loggingWinston = new LoggingWinston();
+const app = express();
+// eslint-disable-next-line new-cap
+const router = express.Router();
 
-const logger = winston.createLogger({
-    level: 'info',
-    transports: [
-        new winston.transports.Console(),
-        // Add Stackdriver Logging
-        loggingWinston,
-    ],
-    msg: 'HTTP {{req.method}} {{req.url}}',
-});
+app.use(cors());
+
+const {hello, helloUser} = require('./hello');
+router.get('/', hello);
+router.get('/:username', helloUser);
+
+app.use('/', router);
 
 
-const cors = require('cors')({
-    origin: true,
-});
-
-exports.main = (req, res) => {
-    logger.info('TEST2 WINSTON');
-    cors(req, res, () => {});
-    res.send('Hello, World!');
-};
+exports.app = app;
