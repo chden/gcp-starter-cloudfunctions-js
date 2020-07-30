@@ -13,6 +13,8 @@
 .git
 .gitignore
 
+.eslintrc.yml
+
 node_modules
 
 test
