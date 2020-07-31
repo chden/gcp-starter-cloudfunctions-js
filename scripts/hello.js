@@ -2,8 +2,9 @@
 
 const {logger} = require('./logger');
 
+
 exports.hello = (req, res) => {
-    logger.info('this is an info log message');
+    logger.info('Log this message!');
     res.send('Hello, World!');
 };
 

@@ -5,12 +5,18 @@ const {LoggingWinston} = require('@google-cloud/logging-winston');
 const expressWinston = require('express-winston');
 const path = require('path');
 
+
+const transportsInstances = [];
+if (process.env.APP_ENV === 'prod') {
+    transportsInstances.push(new LoggingWinston());
+} else {
+    transportsInstances.push(new transports.Console());
+}
+
 const options = {
-    level: 'debug',
-    transports: [
-        // new transports.Console(),
-        new LoggingWinston(),
-    ],
+    level: process.env.APP_LOG_LEVEL ||
+        (process.env.APP_ENV === 'prod' ? 'info' : 'debug'),
+    transports: transportsInstances,
     format: format.combine(
         format.label({label: path.basename(process.mainModule.filename)}),
         format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
@@ -22,12 +28,11 @@ const options = {
 };
 
 const optionsHttp = {
-    transports: [new LoggingWinston({})],
-    // transports: [new winston.transports.Console()],
-    metaField: null, // this causes the metadata to be stored at the root of the log entry
-    responseField: null, // this prevents the response from being included in the metadata (including body and status code)
-    requestWhitelist: ['headers', 'query'], // these are not included in the standard StackDriver httpRequest
-    responseWhitelist: ['body'], // this populates the `res.body` so we can get the response size (not required)
+    transports: transportsInstances,
+    metaField: null, // store metadata at the root of the log entry
+    responseField: null, // prevents the res from being included in the metadata
+    requestWhitelist: ['headers', 'query'],
+    responseWhitelist: ['body'], // populates res.body to get the response size
     dynamicMeta: (req, res) => {
         const httpRequest = {};
         const meta = {};
@@ -36,8 +41,9 @@ const optionsHttp = {
             httpRequest.requestMethod = req.method;
             httpRequest.requestUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
             httpRequest.protocol = `HTTP/${req.httpVersion}`;
-            // httpRequest.remoteIp = req.ip // this includes both ipv6 and ipv4 addresses separated by ':'
-            httpRequest.remoteIp = req.ip.indexOf(':') >= 0 ? req.ip.substring(req.ip.lastIndexOf(':') + 1) : req.ip; // just ipv4
+            httpRequest.remoteIp = req.ip.indexOf(':') >= 0 ?
+                req.ip.substring(req.ip.lastIndexOf(':') + 1) :
+                req.ip; // just ipv4
             httpRequest.requestSize = req.socket.bytesRead;
             httpRequest.userAgent = req.get('User-Agent');
             httpRequest.referrer = req.get('Referrer');
@@ -63,10 +69,7 @@ const optionsHttp = {
 };
 
 const logger = createLogger(options);
-
 const loggerHttp = expressWinston.logger(optionsHttp);
-
-
 
 module.exports = {
     logger,
