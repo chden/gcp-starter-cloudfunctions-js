@@ -10,5 +10,8 @@ exports.hello = (req, res) => {
 
 exports.helloUser = (req, res) => {
     const username = req.params.username;
+    if (username === 'asdf') {
+        throw Error('My Error');
+    }
     res.send(`Hello, ${username}!`);
 };

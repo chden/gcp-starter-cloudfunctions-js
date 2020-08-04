@@ -68,10 +68,20 @@ const optionsHttp = {
     },
 };
 
+const optionsError = {
+    transports: transportsInstances,
+    msg: 'ERROR: {{err.message}} {{res.statusCode}} {{req.method}}',
+    format: format.combine(
+        format.json(),
+    ),
+};
+
 const logger = createLogger(options);
 const loggerHttp = expressWinston.logger(optionsHttp);
+const loggerError = expressWinston.errorLogger(optionsError);
 
 module.exports = {
     logger,
     loggerHttp,
+    loggerError,
 };
