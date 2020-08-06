@@ -5,21 +5,28 @@ const {LoggingWinston} = require('@google-cloud/logging-winston');
 const expressWinston = require('express-winston');
 const path = require('path');
 
+const packageJson = require('../package.json');
+
 
 const transportsInstances = [];
+let level = 'info';
 if (process.env.APP_ENV === 'prod') {
-    transportsInstances.push(new LoggingWinston());
+    transportsInstances.push(new LoggingWinston({
+        logName: packageJson.name ? `${packageJson.name}_log` : 'winston_log',
+        labels: {
+            version: packageJson.version || '',
+        },
+    }));
 } else {
+    level = 'debug';
     transportsInstances.push(new transports.Console());
 }
 
 const options = {
-    level: process.env.APP_LOG_LEVEL ||
-        (process.env.APP_ENV === 'prod' ? 'info' : 'debug'),
+    level: level,
     transports: transportsInstances,
     format: format.combine(
         format.label({label: path.basename(process.mainModule.filename)}),
-        format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
         format.printf(
             (info) => `${info.timestamp} ${info.level} [${info.label}]:` +
                 `${info.message}`,
@@ -27,8 +34,10 @@ const options = {
     ),
 };
 
+const logger = createLogger(options);
+
 const optionsHttp = {
-    transports: transportsInstances,
+    winstonInstance: logger, // if provided, transports and format are ignored
     metaField: null, // store metadata at the root of the log entry
     responseField: null, // prevents the res from being included in the metadata
     requestWhitelist: ['headers', 'query'],
@@ -68,16 +77,13 @@ const optionsHttp = {
     },
 };
 
+const loggerHttp = expressWinston.logger(optionsHttp);
+
 const optionsError = {
-    transports: transportsInstances,
+    winstonInstance: logger, // if provided, transports and format are ignored
     msg: 'ERROR: {{err.message}} {{res.statusCode}} {{req.method}}',
-    format: format.combine(
-        format.json(),
-    ),
 };
 
-const logger = createLogger(options);
-const loggerHttp = expressWinston.logger(optionsHttp);
 const loggerError = expressWinston.errorLogger(optionsError);
 
 module.exports = {
