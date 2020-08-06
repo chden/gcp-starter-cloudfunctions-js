@@ -2,26 +2,29 @@
   "name": "gcp-starter-cloud-function",
   "version": "1.0.0",
   "description": "Simple starter project for Google Cloud Functions.",
-  "main": "scripts/index.js",
+  "main": "js/index.js",
   "entrypoint": "app",
   "runtime": "nodejs12",
   "memory": "128MB",
   "scripts": {
-    "test": "mocha --recursive ./test/**/*.unit.test.js",
-    "test:debug": "mocha --nolazy --inspect-brk=9229 --recursive ./test/**/*.unit.test.js",
-    "test:system": "mocha --recursive ./test/**/*.system.test.js",
-    "lint": "npx eslint scripts test",
-    "start": "functions-framework --source=scripts --target=${npm_package_entrypoint}",
-    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=scripts --target=${npm_package_entrypoint}",
-    "deploy": "gcloud functions deploy ${npm_package_name} --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
+    "test": "APP_LOG_LEVEL=error mocha --timeout 5000 --recursive ./test/**/*.unit.test.js",
+    "test:debug": "npm run test -- --nolazy --inspect-brk=9229",
+    "test:system": "APP_LOG_LEVEL=error mocha --timeout 5000 --recursive ./test/**/*.system.test.js",
+    "lint": "npx eslint js test",
+    "start": "functions-framework --source=js --target=${npm_package_entrypoint}",
+    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=js --target=${npm_package_entrypoint}",
+    "deploy": "gcloud functions deploy ${npm_package_name} --set-env-vars APP_ENV=prod --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
   },
   "author": "chden",
   "contributors": [],
   "license": "MIT",
   "dependencies": {
     "@google-cloud/functions-framework": "^1.6.0",
+    "@google-cloud/logging-winston": "^4.0.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",

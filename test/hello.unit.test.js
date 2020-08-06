@@ -1,8 +1,9 @@
 const chai = require('chai');
+// var sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const {mockReq, mockRes} = require('sinon-express-mock');
 
-const {hello, helloUser} = require('../scripts/hello.js');
+const {hello, helloUser} = require('../js/hello.js');
 
 const expect = chai.expect;
 chai.use(sinonChai);

@@ -1,6 +1,6 @@
 # Google Cloud Starter - Cloud Functions
 
-This is a starter project for [Google Cloud Functions](https://cloud.google.com/functions) based on nodejs and is invoked by http requests. It is implemented in JavaScript and provides linting, [cors](https://github.com/expressjs/cors), unit tests and system tests.
+This is a starter project for [Google Cloud Functions](https://cloud.google.com/functions) based on nodejs and is invoked by http requests. It is implemented in JavaScript and provides linting, [cors](https://github.com/expressjs/cors), unit tests, system tests, logging and multiple functions via routing.
 
 ## Install and run locally
 
@@ -39,6 +39,12 @@ This is a starter project for [Google Cloud Functions](https://cloud.google.com/
         npm run test:system
 
     **Note:** Replace `[BASE_URL]` with the url to the cloud function service, e.g. https://us-east1-my-projectid.cloudfunctions.net/
+
+## Logging
+
+By default, `info` level messages are logged. Add the envrionment variable APP_LOG_LEVEL to change the logging level.
+This starter uses [winston](https://github.com/winstonjs/winston) as logging library. Please read more about how to
+write log entries and about all possible logging levels on the project website.
 
 ## License
 Distributed under the MIT License. See LICENSE for more information.

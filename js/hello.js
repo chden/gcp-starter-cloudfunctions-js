@@ -1,4 +1,11 @@
+'use strict';
+
+const {logger} = require('./logger');
+
+
 exports.hello = (req, res) => {
+    logger.info('Log this info message!');
+    logger.warn('Log this warn message!');
     res.send('Hello, World!');
 };
 
