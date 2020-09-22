@@ -9,8 +9,7 @@ const app = express();
 
 app.use(loggerHttp);
 
-// eslint-disable-next-line new-cap
-const router = express.Router();
+const router = new express.Router();
 
 app.use(cors());
 
