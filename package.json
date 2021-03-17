@@ -1,19 +1,22 @@
 {
-  "name": "gcp-starter-cloud-function",
+  "name": "gcp-starter-cloudfunctions-js",
   "version": "1.0.0",
   "description": "Simple starter project for Google Cloud Functions.",
   "main": "js/index.js",
-  "entrypoint": "app",
-  "runtime": "nodejs12",
-  "memory": "128MB",
+  "config": {
+    "entrypoint": "app",
+    "runtime": "nodejs12",
+    "memory": "128MB"
+  },
   "scripts": {
     "test": "APP_LOG_LEVEL=error mocha --timeout 5000 --recursive ./test/**/*.unit.test.js",
     "test:debug": "npm run test -- --nolazy --inspect-brk=9229",
     "test:system": "APP_LOG_LEVEL=error mocha --timeout 5000 --recursive ./test/**/*.system.test.js",
     "lint": "npx eslint js test",
-    "start": "functions-framework --source=js --target=${npm_package_entrypoint}",
-    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=js --target=${npm_package_entrypoint}",
-    "deploy": "gcloud functions deploy ${npm_package_name} --set-env-vars APP_ENV=prod --trigger-http --runtime ${npm_package_runtime} --memory ${npm_package_memory} --entry-point ${npm_package_entrypoint}"
+    "start1": "echo ${npm_package_config_entrypoint}",
+    "start": "functions-framework --source=js --target=${npm_package_config_entrypoint}",
+    "start:debug": "node --inspect node_modules/@google-cloud/functions-framework --source=js --target=${npm_package_config_entrypoint}",
+    "deploy": "gcloud functions deploy ${npm_package_name} --set-env-vars APP_ENV=prod --trigger-http --runtime ${npm_package_config_runtime} --memory ${npm_package_config_memory} --entry-point ${npm_package_config_entrypoint}"
   },
   "author": "chden",
   "contributors": [],

@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const {loggerHttp, loggerError} = require('./logger');
+const {loggerHttp, loggerError} = require('./utils/logger');
 const cors = require('cors');
 
 
@@ -13,7 +13,7 @@ const router = new express.Router();
 
 app.use(cors());
 
-const {hello, helloUser} = require('./hello');
+const {hello, helloUser} = require('./hello/hello');
 router.get('/', hello);
 router.get('/:username', helloUser);
 

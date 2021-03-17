@@ -9,4 +9,4 @@ parserOptions:
   ecmaVersion: 11
 rules:
   quotes: ['warn', 'single', 'avoid-escape']
-  indent: ['error', 4]
+  indent: ['error', 2]
