@@ -58,7 +58,7 @@ By default, `info` level messages are logged. Add the envrionment variable APP_L
 
         gcloud functions deploy FUNCTION_NAME --update-env-vars APP_LOG_LEVEL=debug
 
-Also consider to [change the environment variables](https://cloud.google.com/functions/docs/env-var#updating_runtime_environment_variables) with Cloud Console.
+Also consider to [change the environment variables](https://cloud.google.com/functions/docs/env-var#updating_runtime_environment_variables) with Cloud Console. The default logName is "projects/[PROJECT_ID]/logs/[PACKAGE_JSON_NAME]_log".
 This starter uses [winston](https://github.com/winstonjs/winston) as logging library. Please read more about how to
 write log entries and about all possible logging levels on the project website.
 
